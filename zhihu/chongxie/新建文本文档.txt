@@ -1,0 +1,113 @@
+import React, { Component } from 'react';
+import {
+    StyleSheet,
+    Text,
+    View,
+    Image
+} from 'react-native';
+import TabNavigator from 'react-native-tab-navigator';
+import Homes from './app/pages/home/index';
+import Message from './app/pages/message/index';
+import Mine from './app/pages/mine/index';
+import Find from './app/pages/find/index';
+
+// import Icon from 'react-native-vector-icons/Ionicons';
+
+export default class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {selectedTab: "find"}
+    }
+    render() {
+        return (
+            <TabNavigator>
+                <TabNavigator.Item
+                    selected={this.state.selectedTab === 'home'}
+                    title="主页"
+                    selectedTitleStyle={{color:"#007aff"}}//设置tab标题颜色
+                    renderIcon={() => <Image style={styles.icon} source={require('./resource/image/home.png')} /> }
+                    renderSelectedIcon={() => <Image style={styles.icon} source={require('./resource/image/selectHome.png')} /> }//设置图标选中颜色
+                    // badgeText="1"
+                    onPress={() => this.setState({ selectedTab: 'home' })}>
+                    <View style={styles.pages1}>
+                        <Homes />
+                    </View>
+                </TabNavigator.Item>
+
+                <TabNavigator.Item
+                    selected={this.state.selectedTab === 'find'}
+                    title="发现"
+                    selectedTitleStyle={{color:"#007aff"}}
+                    badgeText="1" //  设置信息
+                    renderIcon={() => <Image style={styles.icon} source={require('./resource/image/find.png')} />}
+                    renderSelectedIcon={() => <Image style={[styles.icon,{tintColor:'#007aff'}]} source={require('./resource/image/selectFind.png')} />}
+                    // renderBadge={() => <CustomBadgeView />}
+                    onPress={() => this.setState({ selectedTab: 'find' })}>
+                    <View style={styles.pages2}>
+                        <Find />
+                    </View>
+                </TabNavigator.Item>
+
+
+                <TabNavigator.Item
+                    selected={this.state.selectedTab === 'add'}
+                    // title="消息"
+                    // selectedTitleStyle={{color:"#007aff"}}
+                    renderIcon={() => <Image style={styles.add} source={require('./resource/image/add.png')} />}
+                    // renderSelectedIcon={() => <Image style={[styles.icon,{tintColor:'#007aff'}]} source={require('./resource/image/selectMessage.png')} />}
+                    // renderBadge={() => <CustomBadgeView />}
+                    onPress={() => this.setState({ selectedTab: 'add' })}>
+                    <View style={styles.pages2}>
+                        <Text>
+                            add
+                        </Text>
+                    </View>
+                </TabNavigator.Item>
+
+
+                <TabNavigator.Item
+                    selected={this.state.selectedTab === 'message'}
+                    title="消息"
+                    selectedTitleStyle={{color:"#007aff"}}
+                    renderIcon={() => <Image style={styles.icon} source={require('./resource/image/message.png')} />}
+                    renderSelectedIcon={() => <Image style={[styles.icon,{tintColor:'#007aff'}]} source={require('./resource/image/selectMessage.png')} />}
+                    // renderBadge={() => <CustomBadgeView />}
+                    onPress={() => this.setState({ selectedTab: 'message' })}>
+                    <View style={styles.pages3}>
+                        <Message />
+                    </View>
+                </TabNavigator.Item>
+                <TabNavigator.Item
+                    selected={this.state.selectedTab === 'mine'}
+                    title="我的"
+                    selectedTitleStyle={{color:"#007aff"}}
+                    renderIcon={() => <Image style={styles.icon} source={require('./resource/image/mine.png')} />}
+                    renderSelectedIcon={() => <Image style={[styles.icon,{tintColor:'#007aff'}]} source={require('./resource/image/selectMine.png')} />}
+                    // renderBadge={() => <CustomBadgeView />}
+                    onPress={() => this.setState({ selectedTab: 'mine' })}>
+                    <View style={styles.pages4}>
+                        <Mine />
+                    </View>
+                </TabNavigator.Item>
+            </TabNavigator>
+        );
+    }
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    },
+    icon:{
+        width:20,
+        height:20
+    },
+    add:{
+        width: 35,
+        height: 30,
+        borderRadius:5
+    }
+});
